@@ -5,10 +5,12 @@ const {
     addUserForMeetingById
 } = require( '../controller/meetings' );
 
+const { authenticate } = require( '../utils/auth' );
+
 const router = express.Router();
 
-router.get( '/', getMeetingsByFilters );
-router.patch( '/:meeting_id/:action', ( req, res, next ) => {
+router.get( '/', authenticate, getMeetingsByFilters );
+router.patch( '/:meeting_id/:action', authenticate, ( req, res, next ) => {
     const action = req.params.action;
 
     if( action === 'deleteUser' ) {

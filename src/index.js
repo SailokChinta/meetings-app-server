@@ -3,6 +3,7 @@ const express = require( 'express' );
 
 const usersRouter = require( './routes/users' );
 const meetingsRouter = require( './routes/meetings' );
+const authRouter = require( './routes/auth' );
 
 const { genericApiErrorHandler } = require('./middleware/error');
 
@@ -12,6 +13,7 @@ const app = express();
 app.use( express.json() );
 app.use( express.urlencoded() );
 
+app.use( '/api/auth', authRouter );
 app.use( '/api/users', usersRouter );
 app.use( '/api/meetings', meetingsRouter );
 

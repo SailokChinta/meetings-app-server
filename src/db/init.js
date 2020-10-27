@@ -14,7 +14,7 @@ mongoose.connect( uri, { useNewUrlParser: true } );
 mongoose.connection.on( 'open', () => {
     console.log( 'Successfully connected to db' );
     // uncomment to import data
-    seed();
+    // seed();
 });
 
 mongoose.connection.on( 'error', err => {

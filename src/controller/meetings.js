@@ -5,7 +5,7 @@ const Meetings = mongoose.model( 'meeting' );
 async function getMeetingsByFilters ( req, res, next ) {
     const date = req.query.date;
     const search = req.query.search;
-    const userId = req.query.userId;
+    const userId = res.locals.claims.userId;
     const email = req.query.email;
     const period = req.query.period;
 
@@ -59,7 +59,7 @@ async function getMeetingsByFilters ( req, res, next ) {
 }
 
 async function leaveMeetingById ( req, res, next ) {
-    const userId = req.query.userId;
+    const userId = res.locals.claims.userId;
     const email = req.query.email;
     const meeting_id = req.params.meeting_id;
 
@@ -94,16 +94,9 @@ async function addUserForMeetingById ( req, res, next ) {
         } else {
             attendees = [ data ];
         }
-        // if( userId && email ) {
-        //     filter.$push.attendees.userId = userId;
-        //     filter.$push.attendees.email = email;
-        // } else {
-        //     const error = new Error( 'Attendee data is missing' );
-        //     error.status = 400;
-        //     next( error );
-        // }
+
         filter.$addToSet.attendees = attendees;
-        const updatedMeetings = await Meetings.findByIdAndUpdate( meeting_id, filter );
+        const updatedMeetings = await Meetings.findByIdAndUpdate( meeting_id, filter, { runValidators: true } );
         res.status( 201 ).json( updatedMeetings );
     } catch( error ) {
         error.status = 400;

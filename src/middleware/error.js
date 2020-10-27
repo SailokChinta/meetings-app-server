@@ -1,5 +1,5 @@
 function genericApiErrorHandler( err, req, res, next ) {
-    res.status( err.status ).json( err.message );
+    res.status( err.status ).json({ message: err.message });
 }
 
 module.exports = {
