@@ -82,7 +82,7 @@ async function leaveMeetingById ( req, res, next ) {
     }
 }
 
-async function addUserForMeetingById ( req, res, next ) {
+async function addUsersForMeetingById ( req, res, next ) {
     const meeting_id = req.params.meeting_id;
     const data = req.body;
     let attendees;
@@ -104,8 +104,46 @@ async function addUserForMeetingById ( req, res, next ) {
     }
 }
 
+async function addMeetings ( req, res, next ) {
+    const userId = res.locals.claims.userId;
+    const email = res.locals.claims.email;
+    const data = req.body;
+
+    const self_user = {
+        userId,
+        email
+    };
+
+    let meetings;
+    try {
+        if ( data instanceof Array ) {
+            meetings = data;
+        } else {
+            meetings = [ data ];
+        }
+
+        meetings.forEach( meeting => {
+            if ( meeting.attendees.indexOf( self_user ) === -1 ) {
+                meeting.attendees.push( self_user );
+            }
+        });
+
+        const addedMeetings = await Meetings.insertMany( meetings );
+        res.status( 201 ).json( addedMeetings );
+    } catch ( error ) {
+        if( error.message.includes( 'Cast to' ) || error.message.includes( 'validation failed' ) ) {
+            error.status = 400;
+        } else {
+            error.status = 500;
+        }
+
+        next( error );
+    }
+}
+
 module.exports = {
     getMeetingsByFilters,
     leaveMeetingById,
-    addUserForMeetingById
+    addUsersForMeetingById,
+    addMeetings
 }

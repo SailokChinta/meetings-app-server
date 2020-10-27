@@ -12,7 +12,8 @@ async function sendToken( req, res, next ) {
             if ( user ) {
                 if( user.email === email && user.password === password ) {
                     const claims = {
-                        userId: user._id
+                        userId: user._id,
+                        email: user.email
                     } 
                     jwt.sign( claims, 'key', { expiresIn: '24h' }, ( err, token ) => {
                         if( err ) {

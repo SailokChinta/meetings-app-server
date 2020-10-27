@@ -2,7 +2,8 @@ const express = require( 'express' );
 const { 
     getMeetingsByFilters, 
     leaveMeetingById,
-    addUserForMeetingById
+    addUsersForMeetingById,
+    addMeetings
 } = require( '../controller/meetings' );
 
 const { authenticate } = require( '../utils/auth' );
@@ -16,8 +17,8 @@ router.patch( '/:meeting_id/:action', authenticate, ( req, res, next ) => {
     if( action === 'deleteUser' ) {
         leaveMeetingById( req, res, next );
     } else if( action === 'addUser' ) {
-        addUserForMeetingById( req, res, next );
+        addUsersForMeetingById( req, res, next );
     }
 });
-
+router.post( '/add', authenticate, addMeetings );
 module.exports = router;

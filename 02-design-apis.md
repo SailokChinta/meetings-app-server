@@ -64,4 +64,13 @@ Design the APIS, set up the routes and controller functions, and create Postman 
             - userId and email are necessary or else give 400
         Alternatively
         - POST /api/meetings/:meetingid/users
+    - Add Meeting
+        - POST
+        - /api/meetings/add
+        - request body: array of meetings
+        - request header: auth header
+        - respnse body: array of inserted meetings
+        - error scenario
+            - 400 - bad request
+            - else 201 - created
         

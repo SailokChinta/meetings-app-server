@@ -18,7 +18,8 @@ const teamSchema = new mongoose.Schema({
     },
     shortName: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     description: {
         type: String,
