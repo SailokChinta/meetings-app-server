@@ -23,6 +23,17 @@ function authenticate( req, res, next ) {
     });
 }
 
+function isAdmin ( req, res, next ) {
+    if( !res.locals.claims.isAdmin ) {
+        const error = new Error( 'You are not allowed to visit this page' );
+        error.status = 403;
+        next( error );
+    }
+
+    next();
+}
+
 module.exports = {
-    authenticate
+    authenticate,
+    isAdmin
 }

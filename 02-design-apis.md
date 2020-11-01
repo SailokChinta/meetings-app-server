@@ -74,3 +74,14 @@ Design the APIS, set up the routes and controller functions, and create Postman 
             - 400 - bad request
             - else 201 - created
         
+- Teams
+    - Add a Team
+        - POST
+        - /api/teams/add
+        -  array of teams details
+        - Auth token
+        - added teams in json
+        - 201 or 400 or 500
+    - Add a team member
+        - PATCH
+        - 

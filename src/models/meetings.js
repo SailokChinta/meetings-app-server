@@ -13,10 +13,12 @@ const attendeesSchema = new mongoose.Schema({
 }, { _id: false });
 
 const meetingsSchema = new mongoose.Schema({
-    name: String,
-    description: {
+    name: {
         type: String,
         required: true
+    },
+    description: {
+        type: String,
     },
     date: {
         type: Date,

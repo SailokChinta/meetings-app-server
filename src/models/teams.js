@@ -29,6 +29,6 @@ const teamSchema = new mongoose.Schema({
         type: [ memberSchema ],
         required: true
     }
-});
+}, { versionKey: false });
 
 mongoose.model( 'team', teamSchema );

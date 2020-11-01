@@ -3,6 +3,7 @@ const { seed } = require('./seed');
 
 require( '../models/users' );
 require( '../models/meetings' );
+require( '../models/teams' );
 
 mongoose.set( 'useFindAndModify', false );
 mongoose.set( 'returnOriginal', false );

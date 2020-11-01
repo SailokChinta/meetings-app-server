@@ -14,9 +14,9 @@ router.get( '/', authenticate, getMeetingsByFilters );
 router.patch( '/:meeting_id/:action', authenticate, ( req, res, next ) => {
     const action = req.params.action;
 
-    if( action === 'deleteUser' ) {
+    if( action === 'deleteMember' ) {
         leaveMeetingById( req, res, next );
-    } else if( action === 'addUser' ) {
+    } else if( action === 'addMember' ) {
         addUsersForMeetingById( req, res, next );
     }
 });
