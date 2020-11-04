@@ -76,7 +76,7 @@ userSchema.pre( 'insertMany', function( done, users ) {
 
 // userSchema.methods.checkPassword = async function( password, next ) {
 //     try {
-//         const x = await bcrypt.compare( password, this.password, ( err, res ) => console.log( res ) );
+//         const x = await bcrypt.compare( password, this.password );
 //         console.log( x );
 //         return x;
 //     } catch ( error ) {

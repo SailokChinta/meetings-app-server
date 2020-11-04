@@ -23,8 +23,10 @@ function uploadFiles ( req, res, next ) {
                 throw err;
             }
         });
-
-    } catch ( err ) {
+        res.json({});
+    } catch ( error ) {
+        error.status = 500;
+        error.message = 'Server Side Error';
         next( error );
     }
 }
